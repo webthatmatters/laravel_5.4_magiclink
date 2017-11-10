@@ -15,15 +15,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function magic_token() {
+        return $this->hasOne(UserMagicToken::class)->orderBy('created_at','DESC');
+    }
+    
+    protected static function getByEmail($email) {
+        return self::where('email', $email)->first();
+    }
 }
