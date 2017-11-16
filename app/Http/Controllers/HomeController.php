@@ -13,6 +13,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return response()->json(['success'=>true,'data'=>'home']);
     }
 }

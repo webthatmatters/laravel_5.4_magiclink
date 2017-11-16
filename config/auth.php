@@ -98,5 +98,18 @@ return [
             'expire' => 60,
         ],
     ],
-
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Magic Links
+    |--------------------------------------------------------------------------
+    |
+    | You may specify how long the magic link is valid for, as well as the url
+    | that the sent email will contain.
+    |
+    */    
+    'magic_links' => [
+        'expire' => 5,
+        'url'    => env('MAGIC_LINK_URL','')
+    ]
 ];

@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use App\User;
 use App\Mail\MagicLink;
-use Log;
+
 class UserMagicToken extends Model
 {
-    public static $expirationInMinutes = 5;
     protected $fillable = ['user_id', 'token'];
     
     public function user() {
@@ -19,11 +18,12 @@ class UserMagicToken extends Model
     }
     
     public function sendMail($remember_me) {
-        $url = route('magic_token_login',[
+        $params = http_build_query([
             'token'     => $this->token,
             'remember'  => $remember_me,
             'email'     => $this->user->email,
         ]);
+        $url = config('auth.magic_links.url').$params;
         
         try {
             Mail::to($this->user->email)->send(new MagicLink($url));
@@ -34,7 +34,7 @@ class UserMagicToken extends Model
     }
     
     public function isExpired() {
-        return $this->created_at->diffInMinutes(Carbon::now()) > self::$expirationInMinutes;
+        return $this->created_at->diffInMinutes(Carbon::now()) > config('auth.magic_links.expire');
     }
 
     public function belongsToUser($email) {
