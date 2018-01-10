@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,4 +14,8 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::post('send-magic-link', 'MagicLinkController@send');
     Route::post('login', 'LoginController@login');
     Route::post('register', 'RegisterController@register');
+});
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('/', 'HomeController@index');
 });
