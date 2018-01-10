@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 
 use Carbon\Carbon;
-use App\User;
+use App\Models\User;
 use App\Mail\MagicLink;
 
 class UserMagicToken extends Model

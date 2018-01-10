@@ -9,8 +9,8 @@ use Auth;
 use Carbon\Carbon;
 use JWTAuth;
 
-use App\User;
-use App\UserMagicToken;
+use App\Models\User;
+use App\Models\UserMagicToken;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
